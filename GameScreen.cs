@@ -10,6 +10,7 @@ namespace Xanx
 {
     public class GameScreen
     {
+        public Dictionary<string, Keys[]> Controls = new Dictionary<string, Keys[]>();
         public KeyboardState keyboardState;
         public KeyboardState lastKeyboardState;
         public int windowWidth;
@@ -154,6 +155,15 @@ namespace Xanx
         {
             foreach (Component c in components)
                 c.Draw();
+        }
+
+        public bool isKeySetDown(string keySetKey)
+        {
+            foreach(Keys key in this.Controls[keySetKey])
+                if (this.keyboardState.IsKeyDown(key))
+                    return true;
+
+            return false;
         }
     }
 }
