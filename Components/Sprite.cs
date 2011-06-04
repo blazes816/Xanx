@@ -39,6 +39,12 @@ namespace Xanx.Components
             Parent.Engine.SpriteBatch.End();
         }
 
+        public override void Update()
+        {
+            this.Position += this.Velocity;
+            base.Update();
+        }
+
         #region Getters & Setters
         public Vector2 Position
         {
