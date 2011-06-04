@@ -7,6 +7,7 @@ namespace Xanx.Components
 {
     class Timer : Component
     {
+        // Handles whether or not to remove the timer
         public bool finished = false;
 
         private double endTime;
