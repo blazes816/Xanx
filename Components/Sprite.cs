@@ -11,9 +11,14 @@ namespace Xanx.Components
         private Texture2D spriteTexture;
         private string filename;
 
-        private Vector2 velocity = Vector2.Zero
+        private Vector2 velocity = Vector2.Zero;
         private Vector2 acceleration = Vector2.Zero;
         private Vector2 position = Vector2.Zero;
+        private Vector2 origin = Vector2.Zero;
+        private Rectangle mask = Rectangle.Empty;
+        private float rotation = 0;
+        private float scale = 1;
+        private float depth = 1;
 
         public Sprite(float x, float y, string filename)
         {
@@ -30,13 +35,15 @@ namespace Xanx.Components
         protected override void Load()
         {
             spriteTexture = Parent.Engine.Content.Load<Texture2D>(filename);
+            this.mask = new Rectangle(0,0, spriteTexture.Width, spriteTexture.Height);
         }
 
         public override void Draw()
         {
             
             Parent.Engine.SpriteBatch.Begin(SpriteSortMode.Immediate,BlendState.Additive);
-            Parent.Engine.SpriteBatch.Draw(spriteTexture, position, Color.White);
+            Parent.Engine.SpriteBatch.Draw(spriteTexture, this.Position, this.Mask, Color.White,
+                this.Rotation, this.Origin, this.Scale, SpriteEffects.None, this.Depth);
             Parent.Engine.SpriteBatch.End();
         }
 
@@ -73,6 +80,36 @@ namespace Xanx.Components
         {
             get { return spriteTexture; }
             set { spriteTexture = value; }
+        }
+
+        public Rectangle Mask
+        {
+            get { return mask; }
+            set { mask = value; }
+        }
+
+        public float Rotation
+        {
+            get { return rotation; }
+            set { rotation = value; }
+        }
+
+        public float Depth
+        {
+            get { return depth; }
+            set { depth = value; }
+        }
+
+        public float Scale
+        {
+            get { return scale; }
+            set { scale = value; }
+        }
+
+        public Vector2 Origin
+        {
+            get { return origin; }
+            set { origin = value; }
         }
         #endregion
     }
