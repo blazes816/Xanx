@@ -11,7 +11,8 @@ namespace Xanx.Components
         private Texture2D spriteTexture;
         private string filename;
 
-        private Vector2 velocity = Vector2.Zero;
+        private Vector2 velocity = Vector2.Zero
+        private Vector2 acceleration = Vector2.Zero;
         private Vector2 position = Vector2.Zero;
 
         public Sprite(float x, float y, string filename)
@@ -41,6 +42,7 @@ namespace Xanx.Components
 
         public override void Update()
         {
+            this.Velocity += this.Acceleration;
             this.Position += this.Velocity;
             base.Update();
         }
@@ -59,6 +61,12 @@ namespace Xanx.Components
         {
             get { return velocity; }
             set { velocity = value; }
+        }
+
+        public Vector2 Acceleration
+        {
+            get { return acceleration; }
+            set { acceleration = value; }
         }
 
         public Texture2D SpriteTexture
